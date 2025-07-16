@@ -17,7 +17,7 @@ public void missingValueRaisesException() throws Exception {
 ```
 Para satisfazer isso, mudamos checkForMissingValues para usar java.util.regex e capturar o placeholder faltante:
 
-java
+```java
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -27,82 +27,104 @@ private void checkForMissingValues(String result) {
         throw new MissingValueException("No value for " + m.group());
     }
 }
-E adicionamos um construtor em MissingValueException para receber a mensagem:
+```
+E adicionamos um construtor em `MissingValueException` para receber a mensagem:
 
-java
+```java
 public class MissingValueException extends RuntimeException {
     public MissingValueException(String message) {
         super(message);
     }
 }
+```
 Assim, em poucos minutos criamos um teste mais rico em contexto e atendemos ao critério “verde”.
 
-🧠 Raciocínio Contido no Texto
-Exceções devem fornecer informação útil para diagnóstico.
+---
 
-Testar não só o tipo, mas também a mensagem da exceção aumenta a confiabilidade.
+## 🧠 Raciocínio Contido no Texto
 
-Usar regex para extrair padrões remanescentes de placeholder é um hack rápido para detectar erros.
+- Exceções devem fornecer informação útil para diagnóstico.
+- Testar não só o tipo, mas também a mensagem da exceção aumenta a confiabilidade.
+- Usar regex para extrair padrões remanescentes de placeholder é um hack rápido para detectar erros.
+- Extender a classe de exceção com construtor que aceita mensagem personaliza o feedback.
 
-Extender a classe de exceção com construtor que aceita mensagem personaliza o feedback.
+---
 
-📚 Conceitos Explicativos
-🛡️ 1. Mensagens de Exceção Significativas
-Resumo Exceções com mensagens claras agilizam a identificação de problemas em produção.
+## 📚 Conceitos Explicativos
 
-Exemplo Lúdico É como um alarme de carro que toca “Porta traseira aberta” em vez de apenas “Alarme disparado”: você sabe exatamente onde corrigir antes de sair dirigindo.
+### 🛡️ 1. Mensagens de Exceção Significativas
 
-🎯 2. Testando Detalhes de Exceção
-Resumo Capturar a exceção em try/catch e verificar getMessage() valida o contexto do erro.
+Exceções com mensagens claras agilizam a identificação de problemas em produção.
 
-Exemplo Lúdico Imagine um detetive que, ao prender um suspeito, não só confirma o crime, mas também registra a arma usada — informação vital para a investigação.
+  - **Exemplo Lúdico:** É como um alarme de carro que toca “Porta traseira aberta” em vez de apenas “Alarme disparado”: você sabe exatamente onde corrigir antes de sair dirigindo.
 
-🔍 3. Regex para Detecção de Placeholders
-Resumo Use Pattern e Matcher para encontrar padrões ${...} que sobraram após substituições.
+---
 
-Exemplo Lúdico É como usar um detector de metais na praia: ele apita exatamente onde há algo enterrado, mesmo que outras áreas pareçam limpas.
+### 🎯 2. Testando Detalhes de Exceção
 
-⚙️ 4. Construtor Customizado na Exceção
-Resumo Adicionar construtor que recebe String message capacita a exceção a transportar detalhes específicos.
+Capturar a exceção em try/catch e verificar getMessage() valida o contexto do erro.
 
-Exemplo Lúdico Pense num carta de reclamação que, em vez de “Pedido não entregue”, diz “Pedido #1234 não entregue” — informação direta e útil.
+  - **Exemplo Lúdico:** Imagine um detetive que, ao prender um suspeito, não só confirma o crime, mas também registra a arma usada — informação vital para a investigação.
 
-💼 Capítulo 2.6: Boas Práticas & Cenários Reais 🌟
-✅ Boas Práticas
-Sempre adicione mensagem significativa a exceções esperadas.
+---
 
-Use @Test(expected=...) só para checar tipo; para mensagem, use try/catch.
+### 🔍 3. Regex para Detecção de Placeholders
 
-Extraia placeholder faltante via regex ou parser adequado, não só hard-code.
+Use Pattern e Matcher para encontrar padrões ${...} que sobraram após substituições.
 
-Inclua o nome da variável ou contexto relevante na mensagem.
+  - **Exemplo Lúdico:** É como usar um detector de metais na praia: ele apita exatamente onde há algo enterrado, mesmo que outras áreas pareçam limpas.
 
-Documente testes de exceção com comentários explicando o motivo da verificação.
+---
 
-Mantenha testes que validam tanto tipo quanto conteúdo da exceção para cobertura completa.
+### ⚙️ 4. Construtor Customizado na Exceção
+    
+Adicionar construtor que recebe String message capacita a exceção a transportar detalhes específicos.
 
-🌐 Cenários Reais em Negócios
-E-commerce: lançar MissingValueException("No value for ${orderId}") se o ID do pedido faltar em emails de confirmação.
+  - **Exemplo Lúdico:** Pense num carta de reclamação que, em vez de “Pedido não entregue”, diz “Pedido #1234 não entregue” — informação direta e útil.
 
-Fintech: gerar erro “No value for ${accountBalance}” ao preparar extrato bancário sem saldo definido.
+---
 
-SaaS B2B: disparar “No value for ${customerName}” em notificações de renovação de contrato sem nome do cliente.
+## 💼 Capítulo 2.6: Boas Práticas & Cenários Reais 🌟
 
-IoT: indicar “No value for ${sensorId}” quando configurar dashboards sem identificar o sensor.
+### ✅ Boas Práticas
 
-📝 Exercícios de Fixação
-Em até três linhas, explique por que testar também a mensagem da exceção é importante.
+- Sempre adicione mensagem significativa a exceções esperadas.
+- Use `@Test(expected=...)` só para checar tipo; para mensagem, use try/catch.
+- Extraia placeholder faltante via regex ou parser adequado, não só hard-code.
+- Inclua o nome da variável ou contexto relevante na mensagem.
+- Documente testes de exceção com comentários explicando o motivo da verificação.
+- Mantenha testes que validam tanto tipo quanto conteúdo da exceção para cobertura completa.
 
-Escreva em linguagem natural um cenário de exceção que inclua o nome do campo faltante.
+---
 
-Em Java, crie um teste usando try/catch para verificar que ${date} faltante gera a mensagem “No value for ${date}”.
+### 🌐 Cenários Reais em Negócios
 
-🏆 Soluções
-Mensagens claras aceleram a compreensão do erro, permitindo localizar rapidamente o ponto de falha e contexto específico.
+- **E-commerce:** lançar `MissingValueException("No value for ${orderId}")` se o ID do pedido faltar em emails de confirmação.
 
-Cenário: “Ao gerar relatório ‘Relatório de Vendas de ${month}’, sem definir month, deve lançar MissingValueException com mensagem ‘No value for ${month}’.”
+- **Fintech:** gerar erro “No value for `${accountBalance}`” ao preparar extrato bancário sem saldo definido.
 
-java
+- **SaaS B2B:** disparar “No value for `${customerName}`” em notificações de renovação de contrato sem nome do cliente.
+
+- **IoT:** indicar “No value for `${sensorId}`” quando configurar dashboards sem identificar o sensor.
+
+### 📝 Exercícios de Fixação
+  
+1. Em até três linhas, explique por que testar também a mensagem da exceção é importante.
+
+2. Escreva em linguagem natural um cenário de exceção que inclua o nome do campo faltante.
+
+3. Em Java, crie um teste usando try/catch para verificar que ${date} faltante gera a mensagem “No value for ${date}”.
+
+---
+
+### 🏆 Soluções
+
+1.  Mensagens claras aceleram a compreensão do erro, permitindo localizar rapidamente o ponto de falha e contexto específico.
+
+2. Cenário: “Ao gerar relatório ‘Relatório de Vendas de ` ${month}`’, sem definir month, deve lançar MissingValueException com mensagem ‘No value for `${month}`’.”
+
+3. 
+```java
 @Test
 public void missingDateThrowsWithMessage() throws Exception {
     try {
@@ -112,3 +134,4 @@ public void missingDateThrowsWithMessage() throws Exception {
         assertEquals("No value for ${date}", ex.getMessage());
     }
 }
+```

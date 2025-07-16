@@ -21,7 +21,7 @@ Teste lembrança: avaliar "${one}, ${two}, ${three}" com valores "1", "${foo}", 
 
 Depois, implementamos o mínimo para passar:
 
-java
+```java
 public class Template {
    private Map<String,String> variables;
    private String templateText;
@@ -42,85 +42,114 @@ public class Template {
       return result;
    }
 }
+```
+
 Com isso, voltamos ao verde sem refatorar ainda. Nos restam três testes na lista, e o próximo (unknownVariablesAreIgnored) já passa sem mudanças. Antes de avançar, é bom falhar intencionalmente para garantir que o teste realmente executa.
 
-🧠 Raciocínio Contido no Texto
-Para manter o fluxo, usamos hacks (regex hard-coded) até o próximo teste falhar.
+---
 
-Escrever testes que expõem deficiências (triangulação) guia a evolução do código.
+## 🧠 Raciocínio Contido no Texto
 
-Registrar limitações como novos testes mantém o foco num passo só de cada vez.
+- Para manter o fluxo, usamos hacks (regex hard-coded) até o próximo teste falhar.
 
-A busca-e-substituição por mapas de variáveis resolve múltiplos placeholders de forma rápida e simples.
+- Escrever testes que expõem deficiências (triangulação) guia a evolução do código.
 
-📚 Conceitos Explicativos
-🔢 1. Teste para Múltiplas Variáveis
-Resumo Crie testes que validem templates com diversas variáveis, forçando a lógica a lidar com mais de um placeholder.
+- Registrar limitações como novos testes mantém o foco num passo só de cada vez.
 
-Exemplo Lúdico É como testar um misturador de cores: primeiro você mistura vermelho+azul, depois adiciona verde e espera uma nova cor. Cada adição é um teste que confirma que o misturador funciona.
+- A busca-e-substituição por mapas de variáveis resolve múltiplos placeholders de forma rápida e simples.
 
-🎯 2. Triangulação de Testes
-Resumo Adicione novos testes que derrubem hacks anteriores, empurrando a implementação para a solução real.
+---
 
-Exemplo Lúdico Pense num marinheiro que navega por estrelas: traça duas referências (triangulação) para garantir a rota exata, ajustando sempre que uma estrela desaparece.
+## 📚 Conceitos Explicativos
 
-⚙️ 3. Hack Rápido com Regex e Map
-Resumo Use replaceAll em loop sobre HashMap de variáveis para passar testes sem parser completo.
+### 🔢 1. Teste para Múltiplas Variáveis
 
-Exemplo Lúdico É como usar cola quente para juntar móveis provisórios: resolve rapidinho, mas depois você troca por parafusos para ficar firme.
+Crie testes que validem templates com diversas variáveis, forçando a lógica a lidar com mais de um placeholder.
 
-📝 4. Documentar Limitações como Testes
-Resumo Quando notar uma deficiência (por exemplo, valores contendo ${x}), crie um teste que espera o comportamento correto em vez de consertar tudo de uma vez.
+  - **Exemplo Lúdico:** É como testar um misturador de cores: primeiro você mistura vermelho+azul, depois adiciona verde e espera uma nova cor. Cada adição é um teste que confirma que o misturador funciona.
 
-Exemplo Lúdico É como anotar no roteiro de um filme: “na cena 5, preciso de um dublê para piruetas” antes de focar na cena inteira, garantindo que nada seja esquecido.
+---
 
-🌟 Capítulo 2.4: Boas Práticas & Cenários Reais 💼
-✅ Boas Práticas
-Mantenha uma lista viva de testes: cada nova deficiência vira um teste.
+### 🎯 2. Triangulação de Testes
 
-Aplique hacks localizados (hard-coded) até o teste correspondente falhar.
+Adicione novos testes que derrubem hacks anteriores, empurrando a implementação para a solução real.
 
-Use triangulação: para cada valor fake que passar, crie outro teste com valor diferente.
+  - **Exemplo Lúdico:** Pense num marinheiro que navega por estrelas: traça duas referências (triangulação) para garantir a rota exata, ajustando sempre que uma estrela desaparece.
 
-Refatore logo após o conjunto de testes verdes, extraindo parsing genérico.
+---
 
-Documente via comentário o próximo passo para remover o hack.
+### ⚙️ 3. Hack Rápido com Regex e Map
 
-Insista em ver o vermelho antes do verde ao adicionar novos testes.
+Use replaceAll em loop sobre HashMap de variáveis para passar testes sem parser completo.
 
-🌐 Cenários Reais em Negócios
-E-commerce: templates de carrinho com várias variáveis (itens, quantidades, preços) e ignorar campos extras na API.
+  - **Exemplo Lúdico:** É como usar cola quente para juntar móveis provisórios: resolve rapidinho, mas depois você troca por parafusos para ficar firme.
 
-Fintech: geração de extratos com múltiplas linhas de transação, substituindo placeholders de data, valor e descrição.
+---
 
-SaaS B2B: notificações personalizadas para clientes, variando dados de contato, nome da empresa e assinatura.
+### 📝 4. Documentar Limitações como Testes
 
-IoT: dashboards que mostram leituras de diversos sensores, ignorando IDs não configurados.
+Quando notar uma deficiência (por exemplo, valores contendo `${x}`), crie um teste que espera o comportamento correto em vez de consertar tudo de uma vez.
 
-📝 Exercícios de Fixação
-Explique em até três linhas por que criar testes que expõem hacks (triangulação) é crucial no TDD.
+  - **Exemplo Lúdico:** É como anotar no roteiro de um filme: “na cena 5, preciso de um dublê para piruetas” antes de focar na cena inteira, garantindo que nada seja esquecido.
 
-Cite dois potenciais problemas de usar replaceAll com regex para parsing de templates.
+---
 
-Escreva um teste (linguagem natural) que force o motor a ignorar variáveis desconhecidas e preservar placeholders não preenchidos.
+## 🌟 Capítulo 2.4: Boas Práticas & Cenários Reais 💼
 
-🏆 Soluções
-A triangulação adiciona cenários que quebram implementações temporárias, forçando melhorias graduais e evitando soluções monolíticas.
+### ✅ Boas Práticas
 
-Valores contendo {$...} podem ser substituídos indevidamente.
+- Mantenha uma lista viva de testes: cada nova deficiência vira um teste.
 
-Regex complexas podem não capturar todos os formatos ou escapar caracteres especiais.
+- Aplique hacks localizados (hard-coded) até o teste correspondente falhar.
 
-Cenário:
+- Use triangulação: para cada valor fake que passar, crie outro teste com valor diferente.
 
-Dado o template "Valor: ${amount}, Desconto: ${discount}, Total: ${total}"  
-Quando definir amount="100" e total="90" (sem definir discount)  
-Então evaluate() deve retornar "Valor: 100, Desconto: ${discount}, Total: 90"  
-java
-@Test
-public void unknownPlaceholdersRemain() throws Exception {
-    Template tpl = new Template("Valor: ${amount}, Desconto: ${discount}, Total: ${total}");
-    tpl.set("amount", "100");
-    tpl.set("total", "90");
-    assertEquals("Valor: 100, Desconto: ${discount}, Total: 90", tpl.evaluate());
-}
+- Refatore logo após o conjunto de testes verdes, extraindo parsing genérico.
+
+- Documente via comentário o próximo passo para remover o hack.
+
+- Insista em ver o vermelho antes do verde ao adicionar novos testes.
+
+### 🌐 Cenários Reais em Negócios
+
+- **E-commerce:** templates de carrinho com várias variáveis (itens, quantidades, preços) e ignorar campos extras na API.
+
+- **Fintech:** geração de extratos com múltiplas linhas de transação, substituindo placeholders de data, valor e descrição.
+
+- **SaaS B2B:** notificações personalizadas para clientes, variando dados de contato, nome da empresa e assinatura.
+
+- **IoT:** dashboards que mostram leituras de diversos sensores, ignorando IDs não configurados.
+
+### 📝 Exercícios de Fixação
+
+1. Explique em até três linhas por que criar testes que expõem hacks (triangulação) é crucial no TDD.
+
+2. Cite dois potenciais problemas de usar replaceAll com regex para parsing de templates.
+
+3. Escreva um teste (linguagem natural) que force o motor a ignorar variáveis desconhecidas e preservar placeholders não preenchidos.
+
+### 🏆 Soluções
+
+1. A triangulação adiciona cenários que quebram implementações temporárias, forçando melhorias graduais e evitando soluções monolíticas.
+
+2. Valores contendo {$...} podem ser substituídos indevidamente.
+
+3. Regex complexas podem não capturar todos os formatos ou escapar caracteres especiais.
+
+  ### Cenário:
+
+  - Dado o template "Valor: ${amount}, Desconto: ${discount}, Total: ${total}"  
+  - Quando definir amount="100" e total="90" (sem definir discount)  
+  - Então evaluate() deve retornar "Valor: 100, Desconto: ${discount}, Total: 90"
+
+
+  ```java
+  // Java + JUnit
+  @Test
+  public void unknownPlaceholdersRemain() throws Exception {
+      Template tpl = new Template("Valor: ${amount}, Desconto: ${discount}, Total: ${total}");
+      tpl.set("amount", "100");
+      tpl.set("total", "90");
+      assertEquals("Valor: 100, Desconto: ${discount}, Total: 90", tpl.evaluate());
+  }
+  ```

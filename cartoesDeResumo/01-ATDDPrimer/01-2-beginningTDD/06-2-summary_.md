@@ -23,43 +23,39 @@ Agora, vamos virar a página para o próximo capítulo e ver como superar os pon
 ## 📚 Conceitos Explicativos
 
 ### 🔄 1. Ciclo Teste–Código–Refatoração  
-Resumo  
+
 - Escreva um teste que falhe (vermelho).  
 - Implemente o mínimo para fazê-lo passar (verde).  
 - Refatore o código para melhorar design mantendo testes verdes.  
 
-Exemplo Lúdico  
-É como construir uma torre de blocos: primeiro você testa se uma peça encaixa, depois coloca a peça, e por fim ajusta a base para ficar estável antes de subir o próximo bloco.
+  - **Exemplo Lúdico:** É como construir uma torre de blocos: primeiro você testa se uma peça encaixa, depois coloca a peça, e por fim ajusta a base para ficar estável antes de subir o próximo bloco.
 
 ---
 
 ### 🌱 2. Programação por Intenção  
-Resumo  
+
 - Imagine a interface ideal e escreva o teste como se ela já existisse.  
 - Força a implementação a evoluir para a API desejada.  
 
-Exemplo Lúdico  
-Pense num roteirista que traz um storyboard completo da cena antes que os atores gravem qualquer diálogo, garantindo que a filmagem siga exatamente a visão original.
+  - **Exemplo Lúdico:** Pense num roteirista que traz um storyboard completo da cena antes que os atores gravem qualquer diálogo, garantindo que a filmagem siga exatamente a visão original.
 
 ---
 
 ### 🛡️ 3. Rede de Segurança de Testes  
-Resumo  
+
 - Uma suíte de testes abrangente detecta falhas imediatamente após mudanças.  
 - Dá confiança para refatorar sem medo de quebrar funcionalidades existentes.  
 
-Exemplo Lúdico  
-É como um trampolim de segurança sob um acrobata: ele se arrisca em manobras ousadas sabendo que, se errar, será amparado pela rede.
+  - **Exemplo Lúdico:** É como um trampolim de segurança sob um acrobata: ele se arrisca em manobras ousadas sabendo que, se errar, será amparado pela rede.
 
 ---
 
 ### ⚡ 4. Foco no Essencial  
-Resumo  
+
 - Priorize cada entrega em pequenos incrementos que agreguem valor real e verificável.  
 - Evite gastar tempo com funcionalidades ainda não solicitadas.  
 
-Exemplo Lúdico  
-Como um chef que prepara um amuse-bouche antes do jantar completo — serve algo saboroso e imediato enquanto planeja o prato principal.
+  - **Exemplo Lúdico:** Como um chef que prepara um amuse-bouche antes do jantar completo — serve algo saboroso e imediato enquanto planeja o prato principal.
 
 ---
 
@@ -74,17 +70,22 @@ Como um chef que prepara um amuse-bouche antes do jantar completo — serve algo
 - Integre TDD a CI/CD para feedback contínuo de qualidade.  
 
 ### 🌍 Cenários Reais em Negócios  
-- E-commerce: desenvolver e testar fluxo de checkout passo a passo, refatorando cálculos de frete conforme surgem novos requisitos.  
-- Fintech: escrever testes de cálculo de juros antes de implementar regras complexas de tributação e bilhetagem.  
-- SaaS B2B: usar acceptance TDD para validar cada endpoint da API conforme user stories de clientes corporativos.  
-- IoT: testar leitura e processamento de dados de sensores um a um, garantindo estabilidade antes de implementar a orquestração de múltiplos dispositivos.
+- **E-commerce:** desenvolver e testar fluxo de checkout passo a passo, refatorando cálculos de frete conforme surgem novos requisitos.  
+
+- **Fintech:** escrever testes de cálculo de juros antes de implementar regras complexas de tributação e bilhetagem.  
+
+- **SaaS B2B:** usar acceptance TDD para validar cada endpoint da API conforme user stories de clientes corporativos.  
+
+- **IoT:** testar leitura e processamento de dados de sensores um a um, garantindo estabilidade antes de implementar a orquestração de múltiplos dispositivos.
 
 ---
 
 ## 📝 Exercícios de Fixação
 
 1. Descreva em até três linhas o benefício do ciclo **vermelho-verde-refatorar** no TDD.  
+
 2. Explique como **programação por intenção** influencia o design de APIs.  
+
 3. Dê um exemplo (em linguagem natural) de um teste que deveria entrar na suite de **performance** de um motor de templates.
 
 ---
@@ -92,8 +93,11 @@ Como um chef que prepara um amuse-bouche antes do jantar completo — serve algo
 ## 🏆 Soluções
 
 1. O ciclo vermelho-verde-refatorar comprova que cada funcionalidade só entra quando testada e passa, e garante que o design seja continuamente aprimorado após cada entrega.  
+
 2. Ao escrever testes que supõem a API ideal, o desenvolvedor cria uma implementação que se ajusta à intenção expressa, resultando em interfaces naturalmente simples e intuitivas.  
+
 3. “Ao avaliar um template com 50 variáveis em um texto de 500 palavras, `evaluate()` deve executar em menos de 100 ms.”  
+
 ```java
 @Test
 public void performanceLargeTemplate() {
@@ -103,3 +107,4 @@ public void performanceLargeTemplate() {
     long elapsedMs = (System.nanoTime() - start) / 1_000_000;
     assertTrue("Demorou " + elapsedMs + "ms, alvo 100ms", elapsedMs <= 100);
 }
+```

@@ -23,17 +23,18 @@ Chamamos fail(...) logo após evaluate() para garantir que, se chegarmos lá, fa
 
 Com JUnit 4 podemos usar a sintaxe de anotação, simplificando:
 
-java
+```java
 @Test(expected = MissingValueException.class)
 public void missingValueRaisesException() throws Exception {
     new Template("${foo}").evaluate();
 }
+```
 A anotação valida apenas o tipo da exceção. Para checar mensagem ou detalhes, use try/catch; para verificar só o tipo, a anotação é mais sucinta.
 
-2.5.2 Fazendo o Teste Passar Rapidamente ✅
+### 2.5.2 Fazendo o Teste Passar Rapidamente ✅
 Precisamos fazer evaluate() detectar variáveis não definidas. Um hack rápido é verificar, ao final do replaceAll, se ainda há padrões ${...} na string e lançar a exceção:
 
-java
+```java
 public String evaluate() {
     String result = templateText;
     for (Map.Entry<String,String> entry : variables.entrySet()) {
@@ -45,80 +46,108 @@ public String evaluate() {
     }
     return result;
 }
+```
 Esse código retorna ao “verde” rapidamente, embora ainda precise de refatoração para melhorar clareza e robustez.
 
-🧠 Raciocínio Contido no Texto
-Testar exceções é tão importante quanto testar comportamentos “verdes”.
+---
 
-try/catch versus anotação: escolha a abordagem certa para seu nível de inspeção.
+## 🧠 Raciocínio Contido no Texto
 
-Hack de regex detecta placeholders restantes e garante feedback imediato.
+- Testar exceções é tão importante quanto testar comportamentos “verdes”.
 
-Ciclo Red–Green–Refactor mantém progresso ágil antes de refinamentos.
+- try/catch versus anotação: escolha a abordagem certa para seu nível de inspeção.
 
-📚 Conceitos Explicativos
-🎯 1. Testando Exceções
-Resumo Verificar se comportamento anômalo (variável sem valor) dispara a exceção esperada.
+- Hack de regex detecta placeholders restantes e garante feedback imediato.
 
-Exemplo Lúdico Imagine um detetive que entra numa sala trancada. Se a porta não girar, ele lança um alarme (exceção). Se a porta girar normalmente, algo deu errado no teste — ele esperava o alarme.
+- Ciclo Red–Green–Refactor mantém progresso ágil antes de refinamentos.
 
-⚡ 2. Anotação expected vs try/catch
-Resumo
+---
 
-@Test(expected=Excecao.class): válido para checar só o tipo.
+## 📚 Conceitos Explicativos
 
-try/catch: permite inspeção detalhada da mensagem e propriedades da exceção.
+### 🎯 1. Testando Exceções
 
-Exemplo Lúdico É como usar um sinalizador automático (anotação) que dispara sirene só por tipo de emergência, versus ter um policial (try/catch) que verifica armamento e voz do suspeito antes de prender.
+Verificar se comportamento anômalo (variável sem valor) dispara a exceção esperada.
 
-🔍 3. Hack de Detecção de Placeholders
-Resumo Após substituir variáveis conhecidas, detecte padrões remanescentes ${...} e lance erro.
+- **Exemplo Lúdico:** Imagine um detetive que entra numa sala trancada. Se a porta não girar, ele lança um alarme (exceção). Se a porta girar normalmente, algo deu errado no teste — ele esperava o alarme.
 
-Exemplo Lúdico É como um inspetor de bagagens que, depois de remover itens suspeitos, faz um raio-x final. Se ainda vê algo estranho, toca o alarme.
+---
 
-🛠️ 4. Refatoração Pós-Hack
-Resumo Depois do primeiro “verde”, quebre evaluate() em métodos menores: parsing, substituição e validação de leftovers.
+### ⚡ 2. Anotação expected vs try/catch
 
-Exemplo Lúdico Pense num chef que, após provar a sopa pronta (hack), separa as tarefas: cortar legumes, cozinhar e ajustar tempero—tudo em etapas claras.
+- `@Test(expected=Excecao.class)`: válido para checar só o tipo.
 
-💼 Capítulo 2.6: Boas Práticas & Cenários Reais 🌟
-✅ Boas Práticas
-Escolha @Test(expected=...) para checar só o tipo; use try/catch quando precisar inspecionar detalhes da exceção.
+- `try/catch`: permite inspeção detalhada da mensagem e propriedades da exceção.
 
-Sempre rode o teste novo e veja o vermelho antes do verde para confirmar a execução.
+- **Exemplo Lúdico:** É como usar um sinalizador automático (anotação) que dispara sirene só por tipo de emergência, versus ter um policial (try/catch) que verifica armamento e voz do suspeito antes de prender.
 
-Anote como novos testes os casos de valores inválidos ou placeholders especiais.
+---
 
-Após a entrega rápida, extraia métodos de parsing, substituição e validação em evaluate().
+### 🔍 3. Hack de Detecção de Placeholders
 
-Documente no teste a razão da exceção e contexto do erro para facilitar manutenção.
+Após substituir variáveis conhecidas, detecte padrões remanescentes ${...} e lance erro.
 
-🌐 Cenários Reais em Negócios
-E-commerce: disparar MissingValueException se o email de confirmação usar ${orderId} sem definir o pedido, evitando envios incompletos.
+- **Exemplo Lúdico:** É como um inspetor de bagagens que, depois de remover itens suspeitos, faz um raio-x final. Se ainda vê algo estranho, toca o alarme.
 
-Fintech: lançar erro ao gerar extrato com ${accountNumber} indefinido, prevenindo relatórios incorretos.
+---
 
-SaaS B2B: bloquear envio de alertas com ${userEmail} ausente, garantindo dados de contato.
+### 🛠️ 4. Refatoração Pós-Hack
 
-IoT: sinalizar erro se ${sensorId} não for configurado, evitando leituras inválidas.
+Depois do primeiro “verde”, quebre `evaluate()` em métodos menores: parsing, substituição e validação de leftovers.
 
-📝 Exercícios de Fixação
-Explique em até três linhas a diferença entre usar anotação expected e try/catch para testar exceções.
+- **Exemplo Lúdico:** Pense num chef que, após provar a sopa pronta (hack), separa as tarefas: cortar legumes, cozinhar e ajustar tempero—tudo em etapas claras.
 
-Descreva um cenário (em linguagem natural) em que é crucial lançar MissingValueException.
+---
 
-Em Java, escreva um teste usando anotação para verificar que ${date} sem valor dispara a exceção.
+## 💼 Capítulo 2.6: Boas Práticas & Cenários Reais 🌟
 
-🏆 Soluções
-A anotação expected verifica apenas o tipo de exceção; try/catch permite inspeção adicional da instância lançada (mensagem, causa etc.).
+### ✅ Boas Práticas
 
-Cenário: “Ao enviar e-mail de redefinição de senha com template ‘Temporário: ${tempPass}’, sem definir tempPass, deve lançar MissingValueException para impedir envio de mensagem incompleta.”
+- Escolha `@Test(expected=...)` para checar só o tipo; use try/catch quando precisar inspecionar detalhes da exceção.
 
-Código de teste em Java:
+- Sempre rode o teste novo e veja o vermelho antes do verde para confirmar a execução.
 
-java
-@Test(expected = MissingValueException.class)
-public void datePlaceholderMissingThrows() throws Exception {
-    new Template("Data: ${date}").evaluate();
-}
+- Anote como novos testes os casos de valores inválidos ou placeholders especiais.
+
+- Após a entrega rápida, extraia métodos de parsing, substituição e validação em `evaluate()`.	
+
+- Documente no teste a razão da exceção e contexto do erro para facilitar manutenção.
+
+---
+
+## 🌐 Cenários Reais em Negócios
+
+- **E-commerce:** disparar MissingValueException se o email de confirmação usar `${orderId}` sem definir o pedido, evitando envios incompletos.
+
+- **Fintech:** lançar erro ao gerar extrato com `${accountNumber}` indefinido, prevenindo relatórios incorretos.
+
+- **SaaS B2B:** bloquear envio de alertas com `${userEmail}` ausente, garantindo dados de contato.
+
+- **IoT:** sinalizar erro se `${sensorId}` não for configurado, evitando leituras inválidas.
+
+---
+
+## 📝 Exercícios de Fixação
+
+1. Explique em até três linhas a diferença entre usar anotação expected e try/catch para testar exceções.
+
+2. Descreva um cenário (em linguagem natural) em que é crucial lançar MissingValueException.
+
+3. Em Java, escreva um teste usando anotação para verificar que `${date}` sem valor dispara a exceção.
+
+---
+
+## 🏆 Soluções
+
+1. A anotação expected verifica apenas o tipo de exceção; try/catch permite inspeção adicional da instância lançada (mensagem, causa etc.).
+
+2. Cenário: “Ao enviar e-mail de redefinição de senha com template ‘Temporário: ${tempPass}’, sem definir tempPass, deve lançar MissingValueException para impedir envio de mensagem incompleta.”
+
+3. Código de teste em Java:
+
+```java
+	@Test(expected = MissingValueException.class)
+	public void datePlaceholderMissingThrows() throws Exception {
+	    new Template("Data: ${date}").evaluate();
+	}
 ```

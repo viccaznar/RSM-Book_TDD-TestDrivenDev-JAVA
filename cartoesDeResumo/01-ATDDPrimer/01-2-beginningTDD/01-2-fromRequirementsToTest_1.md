@@ -37,8 +37,10 @@ Testes atômicos mantêm o foco num passo preciso rumo ao sistema completo. Test
 
 ### 🧩 1. Testes vs. Tarefas
 
-- Tarefas descrevem trabalho a fazer; testes definem comportamento que deve funcionar.  
-- Passar num teste é “feito”; concluir uma tarefa não garante sistema ativo.
+- Tarefas descrevem trabalho a fazer; 
+- Testes definem comportamento que deve funcionar.  
+- Passar num teste é “feito”; 
+- Concluir uma tarefa não garante sistema ativo.
 
 - **Exemplo Lúdico:** Imagine construir um **quebra-cabeça**. Tarefas seriam “junte 50 peças azuis”; testes seriam “a ponta superior do castelo forma uma torre completa”. Você só sabe que concluiu quando vê o castelo, não ao juntar peças sem contexto.
 
@@ -84,7 +86,9 @@ Testes atômicos mantêm o foco num passo preciso rumo ao sistema completo. Test
 ## 📝 Exercícios de Fixação
 
 1. Explique em até três linhas por que decompor requisitos em testes é melhor que em tarefas.  
-2. Cite dois benefícios de escrever testes atômicos e isolados.  
+
+2. Cite dois benefícios de escrever testes atômicos e isolados. 
+
 3. Dê um exemplo de teste atômico e isolado para a funcionalidade de template de email (sem código).
 
 ---
@@ -92,8 +96,10 @@ Testes atômicos mantêm o foco num passo preciso rumo ao sistema completo. Test
 ## 🏆 Soluções
 
 1. Testes vinculam diretamente o requisito ao comportamento observável no software, garantindo que “feito” signifique “funciona”, não apenas “foi implementado”.  
+
 2.  
    - Localiza rapidamente a causa de uma falha.  
    - Evita dependências entre testes, proporcionando resultados previsíveis.  
+
 3. Exemplo de teste:  
-   - “Dado um template ‘Olá, {{nome}}!’ e valor ‘Maria’ para {{nome}}, quando renderizar, a saída deve ser ‘Olá, Maria!’.”  
+   - “Dado um template ‘Olá, `{{nome}}`!’ e valor ‘Maria’ para `{{nome}}`, quando renderizar, a saída deve ser ‘Olá, Maria!’.”  

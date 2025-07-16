@@ -40,92 +40,95 @@ public class TestTemplate {
 
 Identificamos repetições ao instanciar Template e chamadas a evaluate(). Também usamos o mesmo texto de template em vários testes. Se separássemos fixtures (estados iniciais) em classes diferentes, teríamos duas classes de testes, mas existe outra refatoração possível.
 
-🧠 Raciocínio Contido no Texto
-Código de teste é tão suscetível a “code rot” quanto o de produção e requer limpeza periódica.
+## 🧠 Raciocínio Contido no Texto
 
-Duplicação e redundância em testes dificultam manutenção e evolução.
+- Código de teste é tão suscetível a “code rot” quanto o de produção e requer limpeza periódica.
 
-Consolidar setup comum em fixtures evita repetição e destaca diferenças entre cenários.
+- Duplicação e redundância em testes dificultam manutenção e evolução.
 
-Refatoração de testes fortalece a confiança no ciclo TDD, tornando falhas e sucessos mais claros.
+- Consolidar setup comum em fixtures evita repetição e destaca diferenças entre cenários.
 
-📚 Conceitos Explicativos
-🔄 1. Testes Têm “Code Rot”
-Resumo
+- Refatoração de testes fortalece a confiança no ciclo TDD, tornando falhas e sucessos mais claros.
+
+## 📚 Conceitos Explicativos
+
+### 🔄 1. Testes Têm “Code Rot”
 
 Testes envelhecem: duplicações e detalhes obsoletos atrapalham a clareza.
 
 Manter testes limpos é tão importante quanto manter o código de produção em dia.
 
-Exemplo Lúdico É como uma horta: se não arrancar as ervas daninhas (duplicações), elas crescem e sufocam as plantas boas (casos de teste).
+  - **Exemplo Lúdico:** É como uma horta: se não arrancar as ervas daninhas (duplicações), elas crescem e sufocam as plantas boas (casos de teste).
 
-🔍 2. Duplicação de Setup
-Resumo
+### 🔍 2. Duplicação de Setup
 
-Instanciar Template várias vezes e usar literais repetidos é sinal de fixture mal organizada.
+- Instanciar Template várias vezes e usar literais repetidos é sinal de fixture mal organizada.
 
-Extrair o setup para um método ou campo compartilhado elimina repetição.
+- Extrair o setup para um método ou campo compartilhado elimina repetição.
 
-Exemplo Lúdico Imagine quatro cozinheiros preparando o mesmo bolo em fornos diferentes, cada um misturando ingredientes do zero. É muito mais eficiente reunir a massa pronta e distribuir em assadeiras separadas.
+  - **Exemplo Lúdico:** Imagine quatro cozinheiros preparando o mesmo bolo em fornos diferentes, cada um misturando ingredientes do zero. É muito mais eficiente reunir a massa pronta e distribuir em assadeiras separadas.
 
-🎯 3. Redundância de Chamadas
-Resumo
+### 🎯 3. Redundância de Chamadas
 
-Invocar evaluate() em cada assertEquals repete lógica de verificação.
+- Invocar `evaluate()` em cada `assertEquals` repete lógica de verificação.
 
-Extrair em helper method clarifica o propósito de cada teste.
+- Extrair em helper method clarifica o propósito de cada teste.
 
-Exemplo Lúdico Pense num árbitro de futebol que marca todos os gols no apito em vez de apitar a cada jogada — mais simples e focado no resultado.
+  - **Exemplo Lúdico:** Pense num árbitro de futebol que marca todos os gols no apito em vez de apitar a cada jogada — mais simples e focado no resultado.
 
-📦 4. Fixtures Bem Definidas
-Resumo
+### 📦 4. Fixtures Bem Definidas
 
-Fixture: estado inicial comum a vários testes (instâncias e configurações).
+- `Fixture`: estado inicial comum a vários testes (instâncias e configurações).
 
-Use anotações como @Before para preparar o cenário antes de cada teste.
+- Use anotações como `@Before` para preparar o cenário antes de cada teste.
 
-Exemplo Lúdico É como preparar kits de ferramentas para diferentes tarefas: cada kit vem pronto, sem que você precise montar cada parafuso na hora de usar.
+  - **Exemplo Lúdico:** É como preparar kits de ferramentas para diferentes tarefas: cada kit vem pronto, sem que você precise montar cada parafuso na hora de usar.
 
-💼 Capítulo 2.5: Boas Práticas & Cenários Reais 🌟
-✅ Boas Práticas
-Extraia setup repetido para um campo de instância ou método @Before.
+## 💼 Capítulo 2.5: Boas Práticas & Cenários Reais 🌟
 
-Crie helper methods para chamadas frequentes a evaluate().
+### ✅ Boas Práticas
 
-Use variáveis de classe para textos de template comuns, nomeando-as claramente.
+- Extraia setup repetido para um campo de instância ou método `@Before`.
 
-Mantenha testes pequenos, focados e sem dependências entre si.
+- Crie helper methods para chamadas frequentes a `evaluate()`.
 
-Periodicamente revise testes antigos para remover duplicações e atualizar fixtures.
+- Use variáveis de classe para textos de template comuns, nomeando-as claramente.
 
-Considere @ParameterizedTest para cenários que variam apenas dados de entrada.
+- Mantenha testes pequenos, focados e sem dependências entre si.
 
-🌍 Cenários Reais em Negócios
-E-commerce: fixtures para “template de e-mail de boas-vindas” e “template de recuperação de senha”, evitando reescrever setup em cada teste.
+- Periodicamente revise testes antigos para remover duplicações e atualizar fixtures.
 
-Fintech: testes de relatórios financeiros usam fixtures de dados pré-carregados com transações comuns.
+- Considere `@ParameterizedTest` para cenários que variam apenas dados de entrada.
 
-SaaS B2B: painéis de controle compartilham configuração de usuário e permissões em fixtures antes de cada caso de teste.
+### 🌍 Cenários Reais em Negócios
 
-IoT: simulações de rede criam fixtures com sensores ativos, reaproveitadas em diferentes testes de protocolo.
+- **E-commerce:** fixtures para “template de e-mail de boas-vindas” e “template de recuperação de senha”, evitando reescrever setup em cada teste.
 
-📝 Exercícios de Fixação
-Em até três linhas, explique por que extrair fixtures melhora a legibilidade dos testes.
+- **Fintech:** testes de relatórios financeiros usam fixtures de dados pré-carregados com transações comuns.
 
-Identifique na listagem mostrada duas duplicações que podem ser refatoradas.
+- **SaaS B2B:** painéis de controle compartilham configuração de usuário e permissões em fixtures antes de cada caso de teste.
 
-Proponha um helper method em pseudo-código para criar e configurar uma instância de Template com um dado texto.
+- **IoT:** simulações de rede criam fixtures com sensores ativos, reaproveitadas em diferentes testes de protocolo.
 
-🏆 Soluções
-Extrair fixtures centraliza o setup, elimina repetição e torna claro o estado inicial de cada teste, facilitando manutenção.
+## 📝 Exercícios de Fixação
 
-Instância new Template("Hello, ${name}") aparece em oneVariable e unknownVariablesAreIgnored.
+1. Em até três linhas, explique por que extrair fixtures melhora a legibilidade dos testes.
 
-Chamadas repetidas a template.evaluate() dentro de assertEquals.
+2. Identifique na listagem mostrada duas duplicações que podem ser refatoradas.
 
-Exemplo de helper (Java):
+3. Proponha um helper method em pseudo-código para criar e configurar uma instância de Template com um dado texto.
 
-java
+## 🏆 Soluções
+
+1. Extrair fixtures centraliza o setup, elimina repetição e torna claro o estado inicial de cada teste, facilitando manutenção.
+
+2. Instância `new Template("Hello, ${name}")` aparece em `oneVariable` e `unknownVariablesAreIgnored`.
+
+3. Chamadas repetidas a `template.evaluate()` dentro de `assertEquals`.
+
+### Exemplo de helper (Java):
+
+```java
 private Template makeTemplate(String text, Map<String,String> vars) {
     Template tpl = new Template(text);
     for (Map.Entry<String,String> e : vars.entrySet()) {
@@ -133,8 +136,10 @@ private Template makeTemplate(String text, Map<String,String> vars) {
     }
     return tpl;
 }
-java
+```
+
 // Uso em teste
+```java
 @Test
 public void oneVariableWithHelper() {
     Map<String,String> vars = Map.of("name", "Reader");

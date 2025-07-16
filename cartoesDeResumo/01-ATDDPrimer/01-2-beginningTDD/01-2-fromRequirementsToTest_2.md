@@ -23,31 +23,25 @@ Incluindo princípios como “testes devem ser isolados e independentes de ordem
 
 ### 🔢 1. Escolhendo o Próximo Teste
 
-**Resumo**  
 Selecione o teste que você acredita poder passar com mais facilidade ou que represente maior avanço. Ignore os demais até concluí-lo.
 
-**Exemplo Lúdico**  
-Imagine **escalar uma montanha**: você foca no próximo passo seguro, sem olhar o pico inteiro de uma vez. Cada pedra firmada é uma vitória antes de seguir em frente.
+- **Exemplo Lúdico:** Imagine **escalar uma montanha**: você foca no próximo passo seguro, sem olhar o pico inteiro de uma vez. Cada pedra firmada é uma vitória antes de seguir em frente.
 
 ---
 
 ### ✍️ 2. Escrevendo o Teste Antes do Código
 
-**Resumo**  
 Crie o esqueleto do teste, compile e execute-o para confirmar que ele falha — antes mesmo de ter o código de produção.
 
-**Exemplo Lúdico**  
-É como escrever **a letra de uma música** antes de ter os acordes do violão. Você já sabe a melodia e testa o ritmo, mesmo sem as notas definidas.
+- **Exemplo Lúdico:** É como escrever **a letra de uma música** antes de ter os acordes do violão. Você já sabe a melodia e testa o ritmo, mesmo sem as notas definidas.
 
 ---
 
 ### 🎯 3. Programação por Intenção
 
-**Resumo**  
-Imagine a forma ideal do código de produção ao escrever o teste. Descreva o uso perfeito antes de implementá-lo.
+   Imagine a forma ideal do código de produção ao escrever o teste. Descreva o uso perfeito antes de implementá-lo.
 
-**Exemplo Lúdico**  
-Pense num **designer de LEGO** que primeiro imagina o castelo completo e coloca o bloco de torre final antes de criar a base. Ele foca na visão ideal para guiar toda a construção.
+- **Exemplo Lúdico:** Pense num **designer de LEGO** que primeiro imagina o castelo completo e coloca o bloco de torre final antes de criar a base. Ele foca na visão ideal para guiar toda a construção.
 
 ---
 
@@ -56,10 +50,15 @@ Pense num **designer de LEGO** que primeiro imagina o castelo completo e coloca 
 ### ✅ Boas Práticas
 
 - Mantenha uma **lista de testes** derivados diretamente dos requisitos.  
+
 - Escolha sempre o teste com **maior retorno** (fácil de passar, alto valor).  
+
 - Compile e execute o teste imediatamente para confirmar a falha inicial.  
+
 - Utilize **mocks** e **stubs** para isolar dependências e manter testes rápidos.  
+
 - Documente breves comentários no teste para explicar a intenção do comportamento.  
+
 - Revise periodicamente a lista de testes para incluir novos cenários ou retirar casos obsoletos.
 
 ### 🌐 Cenários Reais
@@ -74,7 +73,9 @@ Pense num **designer de LEGO** que primeiro imagina o castelo completo e coloca 
 ## 📝 Exercícios de Fixação
 
 1. Explique em até três linhas por que devemos “escrever e compilar o teste antes do código de produção”.  
-2. Cite dois benefícios de escolher o teste mais fácil ou de maior valor primeiro.  
+
+2. Cite dois benefícios de escolher o teste mais fácil ou de maior valor primeiro. 
+
 3. Descreva um teste atômico e isolado para um engine de template que substitua `{{nome}}` por “Carlos”.
 
 ---
@@ -82,8 +83,9 @@ Pense num **designer de LEGO** que primeiro imagina o castelo completo e coloca 
 ## 🏆 Soluções
 
 1. Escrever e compilar o teste primeiro garante que ele falhe por falta de código, reforçando o ciclo test-first e validando o ambiente de teste.  
+
 2.  
    - Feedback imediato sobre o ponto de partida.  
    - Progresso tangível e motivador, pois um teste concluído reflete funcionalidade real.  
-3.  
-Dado um template "Olá, {{nome}}!" Quando renderizar com nome="Carlos" Então o resultado deve ser "Olá, Carlos!"
+
+3. Dado um template "Olá, {{nome}}!" Quando renderizar com nome="Carlos" Então o resultado deve ser "Olá, Carlos!"

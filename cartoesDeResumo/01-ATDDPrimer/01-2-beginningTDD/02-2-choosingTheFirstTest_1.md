@@ -25,57 +25,47 @@ Tudo certo? Vamos em frente! Primeiro, transformaremos a descrição do motor de
 ## 📚 Conceitos Explicativos
 
 ### 📝 1. Lista Inicial de Testes
-
-Resumo  
+ 
 - Transformar requisitos genéricos em testes concretos e executáveis.  
 - Cada teste valida um cenário de uso específico.
 
-Exemplo Lúdico  
-É como desenhar um mapa do tesouro dividindo a rota em marcos: “na caverna, vire à esquerda e cave até encontrar um baú.” Cada marco é um teste que, quando passa, confirma que seguimos pelo caminho certo.
+  - **Exemplo Lúdico:** É como desenhar um mapa do tesouro dividindo a rota em marcos: “na caverna, vire à esquerda e cave até encontrar um baú.” Cada marco é um teste que, quando passa, confirma que seguimos pelo caminho certo.
 
 ---
 
 ### 🔀 2. Requisitos vs. Testes
+  
+- `Requisitos`: “o sistema substitui placeholders `${firstname}` e `${lastname}`.”  
+- `Testes`: “`'Olá, ${name}'` com `name='Maria'` resulta em `'Olá, Maria'`.”
 
-Resumo  
-- Requisitos: “o sistema substitui placeholders `${firstname}` e `${lastname}`.”  
-- Testes: “`'Olá, ${name}'` com `name='Maria'` resulta em `'Olá, Maria'`.”
-
-Exemplo Lúdico  
-Compare com dar instruções em abstrato (“vá até o lago”) versus definir passos claros (“andar 100 metros para norte, virar a leste e pegar a pedra verde”).
+  - **Exemplo Lúdico:** Compare com dar instruções em abstrato (“vá até o lago”) versus definir passos claros (“andar 100 metros para norte, virar a leste e pegar a pedra verde”).
 
 ---
 
 ### 🔄 3. Transformando Requisitos em Testes
 
-Resumo  
-- Liste cenários detalhados: casos felizes, erros esperados e comportamentos ignorados.  
+- `Liste cenários detalhados`: casos felizes, erros esperados e comportamentos ignorados.  
 - Escreva frases que descrevem entrada, ação e resultado esperado.
 
-Exemplo Lúdico  
-É como escrever receitas: em vez de “cozinhe arroz”, descreva “para 1 xícara de arroz, adicione 2 xícaras d’água; após ferver, mantenha em fogo baixo por 15 minutos”.
+  - **Exemplo Lúdico:** É como escrever receitas: em vez de “cozinhe arroz”, descreva “para 1 xícara de arroz, adicione 2 xícaras d’água; após ferver, mantenha em fogo baixo por 15 minutos”.
 
 ---
 
 ### 🚧 4. Escrevendo o Primeiro Teste Falho
 
-Resumo  
 - Crie o esqueleto da classe de teste e o método de teste.  
 - Compile e execute para confirmar a falha inicial (ver teste vermelho).
 
-Exemplo Lúdico  
-É como plantar uma semente: a primeira semente não brota de imediato — você confirma que o solo está pronto antes de regar.
+  - **Exemplo Lúdico:** É como plantar uma semente: a primeira semente não brota de imediato — você confirma que o solo está pronto antes de regar.
 
 ---
 
 ### 💡 5. Programação por Intenção
 
-Resumo  
 - Imagine a API perfeita e escreva o teste como se o código já existisse.  
 - A implementação deve se moldar à intenção desenhada no teste.
 
-Exemplo Lúdico  
-Pense num **arquiteto** que rabisca o prédio ideal no papel antes de erguer qualquer parede. Ele guia a construção conforme sua visão clara, não conforme limitações iniciais.
+  - **Exemplo Lúdico:** Pense num **arquiteto** que rabisca o prédio ideal no papel antes de erguer qualquer parede. Ele guia a construção conforme sua visão clara, não conforme limitações iniciais.
 
 ```java
 // Java + JUnit
@@ -92,45 +82,52 @@ public class TestTemplate {
 }
 ```
 
-💼 Capítulo 2.3: Boas Práticas & Cenários Reais 🌟
-✅ Boas Práticas
-Mantenha lista de testes derivada diretamente de requisitos.
+## 💼 Capítulo 2.3: Boas Práticas & Cenários Reais 🌟
 
-Escolha sempre o teste de menor esforço ou maior valor para iniciar.
+### ✅ Boas Práticas
 
-Compile e execute imediatamente para ver o teste falhar antes de codificar.
+- Mantenha lista de testes derivada diretamente de requisitos.
 
-Use mocks e stubs para isolar dependências e manter testes rápidos.
+- Escolha sempre o teste de menor esforço ou maior valor para iniciar.
 
-Escreva comentários breves nos testes para explicar o cenário e a intenção.
+- Compile e execute imediatamente para ver o teste falhar antes de codificar.
 
-Atualize a lista de testes continuamente com novos casos encontrados em produção.
+- Use mocks e stubs para isolar dependências e manter testes rápidos.
 
-🌐 Cenários Reais em Negócios
-E-commerce: validar “Hello, ${customer}” antes de implementar todo fluxo de descontos.
+- Escreva comentários breves nos testes para explicar o cenário e a intenção.
 
-Fintech: checar “${amount} + ${tax} com amount=100, tax=0.05 resulta em 105” antes de criar relatórios completos.
+- Atualize a lista de testes continuamente com novos casos encontrados em produção.
 
-SaaS B2B: testar “setConfig(key, value) retorna sucesso” antes de desenvolver interface de administração.
+### 🌐 Cenários Reais em Negócios
 
-IoT: verificar “readSensor('temp') retorna número dentro do intervalo” antes de processar rede de vários sensores.
+- **E-commerce**: validar “Hello, ${customer}” antes de implementar todo fluxo de descontos.
 
-📝 Exercícios de Fixação
-Em até três linhas, explique por que test-first exige compilar e executar o teste antes de escrever código de produção.
+- **Fintech**: checar “${amount} + ${tax} com amount=100, tax=0.05 resulta em 105” antes de criar relatórios completos.
 
-Cite dois critérios para escolher qual teste implementar primeiro.
+- **SaaS B2B**: testar “setConfig(key, value) retorna sucesso” antes de desenvolver interface de administração.
 
-Escreva um teste atômico e isolado (em linguagem natural) para cenário de template com duas variáveis: saudação e nome.
+- **IoT**: verificar “readSensor('temp') retorna número dentro do intervalo” antes de processar rede de vários sensores.
 
-🏆 Soluções
-Compilar e rodar o teste inicialmente confirma que ele falha por falta de implementação, reforçando o ciclo Test-Red-Green e garantindo ambiente de teste configurado.
+### 📝 Exercícios de Fixação
 
-Facilidade de implementação (baixo esforço).
+1. Em até três linhas, explique por que test-first exige compilar e executar o teste antes de escrever código de produção.
 
-Valor de negócio (alto impacto nas funcionalidades principais).
+2. Cite dois critérios para escolher qual teste implementar primeiro.
 
-Cenário “Duas Variáveis”:
+3. Escreva um teste atômico e isolado (em linguagem natural) para cenário de template com duas variáveis: saudação e nome.
 
-Dado o template "Olá, ${greeting} ${name}!"  
-Quando definir greeting="Bem-vindo" e name="Ana"  
-Então evaluate() deve retornar "Olá, Bem-vindo Ana!"  
+### 🏆 Soluções
+
+1. Compilar e rodar o teste inicialmente confirma que ele falha por falta de implementação, reforçando o ciclo Test-Red-Green e garantindo ambiente de teste configurado.
+
+2. Facilidade de implementação (baixo esforço).
+
+3. Valor de negócio (alto impacto nas funcionalidades principais).
+
+---
+
+### 📝 Cenário “Duas Variáveis”
+
+- Dado o template "Olá, ${greeting} ${name}!"  
+- Quando definir greeting="Bem-vindo" e name="Ana"  
+- Então evaluate() deve retornar "Olá, Bem-vindo Ana!"  

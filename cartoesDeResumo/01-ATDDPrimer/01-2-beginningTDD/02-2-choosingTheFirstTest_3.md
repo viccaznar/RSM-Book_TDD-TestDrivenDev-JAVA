@@ -23,31 +23,25 @@ Para eliminar também o hard-coding do prefixo fixo, adicionamos outro teste `di
 
 ### 🧭 1. Triangulação  
 
-**Resumo**  
 Adicionar testes com diferentes entradas para guiar a implementação do mínimo até a solução geral.
 
-**Exemplo Lúdico**  
-Imagine definir a cor de um carro apenas testando “vermelho”. Se você pintar todo o carro de vermelho, vai funcionar só para esse teste. Ao testar também “azul” e “verde”, você força a instalação de uma tinta que aceite qualquer cor, não apenas vermelho.
+  - **Exemplo Lúdico:** Imagine definir a cor de um carro apenas testando “vermelho”. Se você pintar todo o carro de vermelho, vai funcionar só para esse teste. Ao testar também “azul” e “verde”, você força a instalação de uma tinta que aceite qualquer cor, não apenas vermelho.
 
 ---
 
 ### 🛠️ 2. Eliminar Hard-Coding  
 
-**Resumo**  
 Substituir retornos literais por lógica que use variáveis e templates dinamicamente.
 
-**Exemplo Lúdico**  
-É como aprender a cozinhar um prato: primeiro você memoriza “sopa de legumes” inteira (hard-coding). Depois testando “sopa de frango” e “sopa de peixe”, você desenvolve a receita base que aceita qualquer ingrediente.
+  - **Exemplo Lúdico:** É como aprender a cozinhar um prato: primeiro você memoriza “sopa de legumes” inteira (hard-coding). Depois testando “sopa de frango” e “sopa de peixe”, você desenvolve a receita base que aceita qualquer ingrediente.
 
 ---
 
 ### 🔄 3. Expandir Cobertura de Testes  
 
-**Resumo**  
 Crie testes que variem não só o valor da variável, mas também o próprio template, garantindo flexibilidade total.
 
-**Exemplo Lúdico**  
-É similar a um maestro que ensaia uma melodia em diferentes tonalidades e andamentos: só assim ela fica perfeita em qualquer instrumento e ritmo.
+  - **Exemplo Lúdico:** É similar a um maestro que ensaia uma melodia em diferentes tonalidades e andamentos: só assim ela fica perfeita em qualquer instrumento e ritmo.
 
 ---
 
@@ -56,9 +50,13 @@ Crie testes que variem não só o valor da variável, mas também o próprio tem
 ### ✅ Boas Práticas  
 
 - **Use triangulação**: a cada hack (hard-coding) que passar, adicione um teste que o derrube.  
+
 - **Teste cenários variados**: valores diferentes, templates variados e erros esperados.  
+
 - **Refatore imediatamente**: assim que o mínimo passar, extraia lógica para parsing e substituição.  
+
 - **Evolua em pequenos passos**: implemente só o necessário para satisfazer o teste atual.  
+
 - **Comente a intenção**: documente nos testes o motivo de cada cenário (ex.: “força nova template”).
 
 ### 🌐 Cenários Reais em Negócios  
@@ -73,19 +71,22 @@ Crie testes que variem não só o valor da variável, mas também o próprio tem
 ## 📝 Exercícios de Fixação
 
 1. Em até três linhas, explique por que a **triangulação** é essencial após um teste passar com hard-coding.  
-2. Cite dois sinais de que o código hackeado (hard-coded) precisa ser refatorado.  
+
+2. Cite dois sinais de que o código hackeado (hard-coded) precisa ser refatorado. 
+
 3. Escreva um teste simples (em linguagem natural) que force a substituição de dois marcadores, saudação e nome.
 
 ---
 
 ## 🏆 Soluções
 
-1. Triangulação adiciona novos cenários que quebram soluções específicas demais, forçando a generalização da lógica e evitando over-engineering.  
-2.  
+1. Triangulação adiciona novos cenários que quebram soluções específicas demais, forçando a generalização da lógica e evitando over-engineering. 
+
+2. 
    - Um segundo teste com valor diferente falha.  
    - Um teste com template diferente retorna resultado incorreto.  
-3. Cenário “Duas Variáveis”:  
-Dado o template "Good ${timeOfDay}, ${name}!" Quando definir timeOfDay="morning" e name="Bob" Então evaluate() deve retornar "Good morning, Bob!"
+
+3. Cenário “Duas Variáveis": Dado o template "Good ${timeOfDay}, ${name}!" Quando definir timeOfDay="morning" e name="Bob" Então evaluate() deve retornar "Good morning, Bob!"
 
 ```java
 // Java + JUnit
